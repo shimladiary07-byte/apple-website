@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../views/**/*.blade.php';
+@source '../js/**/*.{vue,js}';
+
+@theme {
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+}
