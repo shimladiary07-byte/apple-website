@@ -9,6 +9,11 @@ echo "Configuring Apache to listen on port ${TARGET_PORT}..."
 sed -i -E "s/Listen [0-9]+/Listen ${TARGET_PORT}/g" /etc/apache2/ports.conf
 sed -i -E "s/<VirtualHost \*:[0-9]+>/<VirtualHost \*:${TARGET_PORT}>/g" /etc/apache2/sites-available/000-default.conf
 
+# Ensure .env exists in container
+if [ ! -f /var/www/html/.env ]; then
+    cp /var/www/html/.env.example /var/www/html/.env
+fi
+
 # Ensure SQLite database file exists if DB_CONNECTION is sqlite
 if [ "${DB_CONNECTION:-sqlite}" = "sqlite" ]; then
     DB_FILE="${DB_DATABASE:-/var/www/html/database/database.sqlite}"
@@ -34,7 +39,7 @@ chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/p
 
 # Generate application key if not provided
 if [ -z "$APP_KEY" ]; then
-    echo "APP_KEY is missing, generating a temporary key..."
+    echo "APP_KEY is missing, generating in .env..."
     php artisan key:generate --force || true
 fi
 
@@ -43,14 +48,15 @@ php artisan storage:link --force || true
 
 # Run database migrations
 echo "Running database migrations..."
-php artisan migrate --force
+php artisan migrate --force || echo "Warning: Migration failed or skipped, check DB settings."
 
 # Seed database with initial products, settings and admin if empty
 echo "Running database seeder..."
-php artisan db:seed --force || true
+php artisan db:seed --force || echo "Warning: Seeding failed or skipped."
 
-# Cache Laravel configurations and routes for maximum production speed
+# Clear old cache and cache configurations
 echo "Caching Laravel config, routes, and views..."
+php artisan optimize:clear || true
 php artisan config:cache || true
 php artisan route:cache || true
 php artisan view:cache || true
