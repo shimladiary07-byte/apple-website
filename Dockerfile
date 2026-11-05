@@ -4,8 +4,8 @@
 FROM node:22-slim AS frontend-builder
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install --no-audit
+COPY package*.json .npmrc* ./
+RUN npm install --legacy-peer-deps --no-audit
 
 COPY vite.config.js ./
 COPY resources/ ./resources/

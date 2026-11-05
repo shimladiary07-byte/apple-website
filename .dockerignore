@@ -13,8 +13,6 @@ storage/logs/*.log
 storage/framework/cache/data/*
 storage/framework/sessions/*
 storage/framework/views/*
-public/build
 .phpunit.result.cache
 tests
 docker-compose*.yml
-README.md
