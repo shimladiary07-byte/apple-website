@@ -1,11 +1,11 @@
 # -------------------------------------------------------------
 # Stage 1: Build Frontend Assets (Vite + Vue 3 + Tailwind CSS)
 # -------------------------------------------------------------
-FROM node:20-alpine AS frontend-builder
+FROM node:22-slim AS frontend-builder
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package*.json ./
+RUN npm install --no-audit
 
 COPY vite.config.js ./
 COPY resources/ ./resources/
