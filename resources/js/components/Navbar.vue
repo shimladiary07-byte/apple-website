@@ -43,7 +43,7 @@
           </button>
           <button @click="$emit('open-track')" class="hover:text-red-600 dark:hover:text-red-400 transition-colors flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
             <svg class="w-3.5 h-3.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-            Track Order
+            {{ currentUser && !isAdmin ? 'My Orders' : 'Track Order' }}
           </button>
           <button @click="$emit('open-bulk')" class="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 dark:hover:bg-amber-900/60 px-2.5 py-1 rounded-full text-xs font-semibold border border-amber-200 dark:border-amber-800 transition-colors cursor-pointer whitespace-nowrap">
             Bulk / Wholesale
@@ -87,9 +87,14 @@
 
           <!-- Login / Register Portal Button -->
           <div v-if="currentUser && !isAdmin" class="flex items-center gap-1.5 sm:gap-2">
-            <span class="text-xs font-medium text-stone-700 dark:text-stone-300 max-w-[110px] truncate hidden sm:inline" :title="currentUser.name">
-              👤 {{ currentUser.name }}
-            </span>
+            <button
+              @click="$emit('open-track')"
+              class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 text-xs font-semibold cursor-pointer shadow-2xs whitespace-nowrap"
+              title="View my orders & status"
+            >
+              <span>👤 {{ currentUser.name }}</span>
+              <span class="text-[10px] text-red-600 dark:text-red-400 font-bold ml-0.5">(Orders)</span>
+            </button>
             <button
               @click="$emit('logout')"
               class="px-2.5 py-1.5 rounded-xl border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 text-xs font-semibold cursor-pointer whitespace-nowrap"

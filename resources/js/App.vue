@@ -154,6 +154,7 @@
         :items="cartItems"
         :total-amount="cartTotalAmount"
         :settings="settings"
+        :current-user="currentUser"
         @close="isCheckoutOpen = false"
         @order-placed="onOrderPlaced"
       />
@@ -168,7 +169,9 @@
       <TrackOrderModal
         :is-open="isTrackOpen"
         :initial-query="trackOrderQuery"
+        :current-user="currentUser"
         @close="isTrackOpen = false"
+        @open-login="isLoginOpen = true"
       />
 
       <BulkInquiryModal

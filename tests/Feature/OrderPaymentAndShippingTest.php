@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Order;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -195,5 +196,40 @@ class OrderPaymentAndShippingTest extends TestCase
             ]);
 
         $this->assertAuthenticated();
+    }
+
+    public function test_logged_in_user_can_view_their_orders(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'customer_orders@example.com',
+            'is_admin' => false,
+        ]);
+
+        Order::create([
+            'order_number' => 'APL-2026-TEST1',
+            'customer_name' => $user->name,
+            'customer_phone' => '9876543210',
+            'customer_email' => $user->email,
+            'shipping_address' => 'Mall Road',
+            'city' => 'Shimla',
+            'state' => 'Himachal Pradesh',
+            'pincode' => '171001',
+            'items' => [['product_id' => 1, 'product_name' => 'Royal Delicious', 'box_size' => '5 Kg', 'price' => 1000, 'quantity' => 1]],
+            'subtotal' => 1000,
+            'shipping_fee' => 0,
+            'total_amount' => 1000,
+            'payment_method' => 'cod',
+            'status' => 'confirmed',
+        ]);
+
+        $response = $this->actingAs($user)->getJson('/api/orders/my-orders');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+            ])
+            ->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.order_number', 'APL-2026-TEST1')
+            ->assertJsonPath('data.0.status', 'confirmed');
     }
 }

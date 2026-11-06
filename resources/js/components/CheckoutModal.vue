@@ -399,6 +399,10 @@ export default {
     settings: {
       type: Object,
       default: () => ({})
+    },
+    currentUser: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -499,6 +503,19 @@ export default {
     }
   },
   watch: {
+    isOpen: {
+      immediate: true,
+      handler(val) {
+        if (val && this.currentUser) {
+          if (!this.form.customer_name && this.currentUser.name) {
+            this.form.customer_name = this.currentUser.name;
+          }
+          if (!this.form.customer_email && this.currentUser.email) {
+            this.form.customer_email = this.currentUser.email;
+          }
+        }
+      }
+    },
     isCodAvailable: {
       immediate: true,
       handler(codAllowed) {

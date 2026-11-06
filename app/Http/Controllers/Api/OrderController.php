@@ -128,7 +128,7 @@ class OrderController extends Controller
         $order = Order::create([
             'customer_name' => $validated['customer_name'],
             'customer_phone' => $validated['customer_phone'],
-            'customer_email' => $validated['customer_email'] ?? null,
+            'customer_email' => ! empty($validated['customer_email']) ? $validated['customer_email'] : (auth()->check() ? auth()->user()->email : null),
             'shipping_address' => $validated['shipping_address'],
             'city' => $validated['city'],
             'state' => $validated['state'],
@@ -206,6 +206,33 @@ class OrderController extends Controller
         return response()->json([
             'success' => true,
             'data' => $order,
+        ]);
+    }
+
+    public function myOrders(Request $request)
+    {
+        if (! auth()->check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please log in to view your orders.',
+                'data' => [],
+            ], 401);
+        }
+
+        $user = auth()->user();
+
+        $orders = Order::where(function ($query) use ($user) {
+            $query->where('customer_email', $user->email);
+            if (! empty($user->phone)) {
+                $query->orWhere('customer_phone', $user->phone);
+            }
+        })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $orders,
         ]);
     }
 

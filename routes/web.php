@@ -21,6 +21,7 @@ Route::prefix('api')->group(function () {
     // Orders
     Route::post('/orders', [OrderController::class, 'store']);
     Route::get('/orders/track', [OrderController::class, 'track']);
+    Route::get('/orders/my-orders', [OrderController::class, 'myOrders']);
 
     // Inquiries / Bulk Orders
     Route::post('/inquiries', [InquiryController::class, 'store']);
