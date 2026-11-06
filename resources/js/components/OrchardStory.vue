@@ -1,22 +1,22 @@
 <template>
   <section id="story" class="py-16 bg-stone-50 dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
+
       <!-- Meet The Farmer Card -->
       <div class="bg-white dark:bg-stone-900 rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden shadow-xs p-8 sm:p-12 mb-16">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
+
           <div class="lg:col-span-5">
             <div class="relative rounded-3xl overflow-hidden shadow-lg border-4 border-amber-50 dark:border-stone-800">
-              <img 
-                :src="settings.farmer_photo || 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop'" 
-                :alt="settings.farmer_name || 'Sunil Chauhan'" 
+              <img
+                :src="settings.farmer_photo || 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop'"
+                :alt="settings.farmer_name || 'Sunil Chauhan'"
                 class="w-full h-88 sm:h-96 object-cover"
               />
               <div class="absolute bottom-3 left-3 right-3 bg-stone-900/80 backdrop-blur-md text-white p-3.5 rounded-2xl border border-stone-800">
                 <div class="font-bold text-sm">{{ settings.farmer_name || 'Sunil Chauhan' }}</div>
                 <div class="text-[11px] text-amber-300 font-medium">{{ settings.farmer_title || '3rd Generation Apple Grower' }}</div>
-                <div class="text-[10px] text-stone-300">Kalpa Valley, Kinnaur, Himachal Pradesh</div>
+                <div class="text-[10px] text-stone-300">Maraog, Chaupal, Himachal Pradesh - 172108</div>
               </div>
             </div>
           </div>
@@ -51,16 +51,16 @@
 
             <!-- Farmer Contact / WhatsApp CTA -->
             <div class="pt-4 flex flex-wrap items-center gap-3">
-              <a 
-                :href="'https://wa.me/' + cleanPhone(settings.whatsapp)" 
-                target="_blank" 
+              <a
+                :href="'https://wa.me/' + cleanPhone(settings.whatsapp)"
+                target="_blank"
                 class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-sm transition-all"
               >
                 <span>Chat with {{ settings.farmer_name ? settings.farmer_name.split(' ')[0] : 'Farmer' }} on WhatsApp</span>
               </a>
 
-              <a 
-                :href="'tel:' + settings.phone" 
+              <a
+                :href="'tel:' + settings.phone"
                 class="px-5 py-3 rounded-xl border border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-200 font-semibold text-xs sm:text-sm transition-all"
               >
                 Call: {{ settings.phone }}
@@ -81,7 +81,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          
+
           <!-- Supermarket Apples -->
           <div class="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 shadow-2xs space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-stone-800">
@@ -156,4 +156,3 @@ export default {
   }
 }
 </script>
-

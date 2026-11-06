@@ -25,15 +25,15 @@ class DatabaseSeeder extends Seeder
 
         // 2. Seed Farm Settings
         $settings = [
-            'farm_name' => 'Kinnaur Mountain Apple Orchards',
+            'farm_name' => 'NAAG VALLEY APPLES',
             'tagline' => '100% Tree-Ripened, Wax-Free Himalayan Apples Directly from Orchard to Your Door',
             'farmer_name' => 'Sunil Chauhan',
             'farmer_title' => '3rd Generation Apple Grower',
             'farmer_story' => 'Nestled at 8,500 feet altitude in the pristine Sangla & Kalpa valleys of Kinnaur (Himachal Pradesh), our orchards are nourished by pure glacial snow-melt waters and fresh Himalayan mountain breezes. For over 45 years, our family has practiced natural, pesticide-minimal orcharding with zero synthetic waxes or chemical ripening agents. Every single apple is handpicked at full tree-ripeness, graded for size & crunch, and packaged directly inside padded shock-proof boxes for nationwide fresh shipping.',
-            'phone' => '+91 98160 54321',
-            'whatsapp' => '+919816054321',
+            'phone' => '+91 9816038671',
+            'whatsapp' => '+8219950247',
             'email' => 'contact@kinnaurapples.com',
-            'location' => 'Kalpa Valley, Kinnaur, Himachal Pradesh - 172108',
+            'location' => 'Maraog, Chaupal, Himachal Pradesh - 172108',
             'upi_id' => 'kinnaurfarm@okhdfcbank',
             'upi_name' => 'Kinnaur Mountain Orchards',
             'upi_qr_image' => '',

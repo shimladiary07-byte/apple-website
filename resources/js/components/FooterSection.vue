@@ -1,9 +1,9 @@
 <template>
   <footer class="bg-stone-900 text-stone-300 pt-16 pb-12 border-t border-stone-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-stone-800">
-        
+
         <!-- Col 1 & 2: Brand & Farm bio -->
         <div class="lg:col-span-2 space-y-4">
           <div class="flex items-center gap-3">
@@ -22,7 +22,7 @@
 
           <div class="flex items-center gap-2 pt-2">
             <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-stone-800 text-stone-300 border border-stone-700">
-              🏔️ 8,500 ft Elevation
+              🏔️ 6,350 ft Elevation
             </span>
             <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-stone-800 text-emerald-400 border border-stone-700">
               🌱 Natural Orcharding
@@ -64,7 +64,7 @@
           <h4 class="text-xs font-bold uppercase tracking-wider text-white">Orchard Contact</h4>
           <div class="space-y-2 text-xs text-stone-400">
             <p class="leading-relaxed">
-              📍 {{ settings.location || 'Kalpa Valley, Kinnaur, Himachal Pradesh - 172108' }}
+              📍 {{ settings.location || 'Maraog, Chaupal, Himachal Pradesh - 172108' }}
             </p>
             <p>
               📞 <a :href="'tel:' + settings.phone" class="hover:text-white">{{ settings.phone }}</a>
@@ -143,8 +143,8 @@
           © {{ new Date().getFullYear() }} {{ settings.farm_name || 'Kinnaur Orchards' }}. Developed by <strong class="text-stone-300">Shubham Thakur</strong> (8219795479 • shubhamthakurst07@gmail.com).
         </div>
         <div class="flex items-center gap-4">
-          <button 
-            @click="$emit('toggle-dark-mode')" 
+          <button
+            @click="$emit('toggle-dark-mode')"
             class="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <span>{{ isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode' }}</span>
@@ -177,4 +177,3 @@ export default {
   }
 }
 </script>
-

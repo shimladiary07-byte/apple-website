@@ -1,9 +1,9 @@
 <template>
   <div class="relative overflow-hidden bg-gradient-to-b from-amber-50/60 via-stone-50 to-white dark:from-stone-900 dark:via-stone-950 dark:to-stone-900 pt-8 pb-14 border-b border-stone-200 dark:border-stone-800 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        
+
         <!-- Left Hero Content -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-100/80 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 text-xs font-semibold tracking-wide shadow-2xs">
@@ -73,12 +73,12 @@
         <!-- Right Hero Image Showcase -->
         <div class="lg:col-span-5 relative">
           <div class="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-stone-800 bg-stone-100 dark:bg-stone-800">
-            <img 
-              :src="settings.banner_image || 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1600&auto=format&fit=crop'" 
-              alt="Himachal Mountain Apple Orchard" 
+            <img
+              :src="settings.banner_image || 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1600&auto=format&fit=crop'"
+              alt="Himachal Mountain Apple Orchard"
               class="w-full h-80 sm:h-96 object-cover hover:scale-105 transition-transform duration-700"
             />
-            
+
             <!-- Floating Orchard Badge -->
             <div class="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-stone-900/95 backdrop-blur-md p-4 rounded-2xl border border-stone-200/80 dark:border-stone-800 shadow-lg">
               <div class="flex items-center gap-3">
@@ -87,7 +87,7 @@
                 </div>
                 <div>
                   <div class="text-xs font-bold text-stone-900 dark:text-stone-100">Current Harvest: 2026 Batch</div>
-                  <div class="text-[11px] text-stone-500 dark:text-stone-400">Plucked fresh from Sangla & Kalpa slopes</div>
+                  <div class="text-[11px] text-stone-500 dark:text-stone-400">Plucked fresh from Maraog, Chaupal, Himachal Pradesh - 172108</div>
                 </div>
                 <div class="ml-auto text-right">
                   <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 dark:bg-green-950 text-green-800 dark:text-green-300">
@@ -115,4 +115,3 @@ export default {
   }
 }
 </script>
-

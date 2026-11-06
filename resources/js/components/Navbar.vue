@@ -23,7 +23,7 @@
                 Direct Farmer
               </span>
             </div>
-            <p class="text-[11px] text-stone-500 dark:text-stone-400 hidden xl:block font-medium whitespace-nowrap">8,500 ft Altitude • 100% Tree-Ripened</p>
+            <p class="text-[11px] text-stone-500 dark:text-stone-400 hidden xl:block font-medium whitespace-nowrap">6,300 ft Altitude • 100% Tree-Ripened</p>
           </div>
         </div>
 
@@ -86,9 +86,9 @@
           </button>
 
           <!-- Login / Register Portal Button -->
-          <button 
-            v-if="!isAdmin" 
-            @click="$emit('open-admin-login')" 
+          <button
+            v-if="!isAdmin"
+            @click="$emit('open-admin-login')"
             class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl border border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 text-xs font-semibold transition-all shadow-2xs cursor-pointer whitespace-nowrap"
           >
             <svg class="w-4 h-4 text-stone-500 dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
