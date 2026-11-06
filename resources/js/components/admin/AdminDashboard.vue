@@ -1097,6 +1097,7 @@ export default {
       return `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUri)}`;
     },
     filteredAdminProducts() {
+      if (!Array.isArray(this.products)) return [];
       if (this.productFilterType === 'all') return this.products;
       if (this.productFilterType === 'other') {
         return this.products.filter(p => p.product_type === 'other');
@@ -1104,9 +1105,11 @@ export default {
       return this.products.filter(p => !p.product_type || p.product_type === 'apple');
     },
     appleCount() {
+      if (!Array.isArray(this.products)) return 0;
       return this.products.filter(p => !p.product_type || p.product_type === 'apple').length;
     },
     otherCount() {
+      if (!Array.isArray(this.products)) return 0;
       return this.products.filter(p => p.product_type === 'other').length;
     }
   },
@@ -1182,7 +1185,8 @@ export default {
       try {
         const res = await axios.get('/api/products?all=1');
         if (res.data.success) {
-          this.products = res.data.data;
+          const raw = res.data.data;
+          this.products = Array.isArray(raw) ? raw : (raw && typeof raw === 'object' ? Object.values(raw) : []);
         }
       } catch (err) {
         console.error(err);

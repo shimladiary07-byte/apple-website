@@ -19,16 +19,18 @@ class ProductController extends Controller
             $request->filled('search');
 
         if (! $hasFilters) {
-            $products = Cache::remember('public_active_products', 300, function () {
+            $products = Cache::remember('public_active_products_v2', 300, function () {
                 return Product::where('is_active', true)
                     ->orderBy('sort_order', 'asc')
                     ->orderBy('created_at', 'desc')
-                    ->get();
+                    ->get()
+                    ->values()
+                    ->toArray();
             });
 
             return response()->json([
                 'success' => true,
-                'data' => $products,
+                'data' => array_values($products ?? []),
             ]);
         }
 
@@ -133,6 +135,7 @@ class ProductController extends Controller
 
         $product = Product::create($validated);
         Cache::forget('public_active_products');
+        Cache::forget('public_active_products_v2');
 
         return response()->json([
             'success' => true,
@@ -189,6 +192,7 @@ class ProductController extends Controller
 
         $product->update($validated);
         Cache::forget('public_active_products');
+        Cache::forget('public_active_products_v2');
 
         return response()->json([
             'success' => true,
@@ -202,6 +206,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
         Cache::forget('public_active_products');
+        Cache::forget('public_active_products_v2');
 
         return response()->json([
             'success' => true,
@@ -215,6 +220,7 @@ class ProductController extends Controller
         $product->is_active = ! $product->is_active;
         $product->save();
         Cache::forget('public_active_products');
+        Cache::forget('public_active_products_v2');
 
         return response()->json([
             'success' => true,

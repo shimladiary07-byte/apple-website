@@ -273,9 +273,11 @@ export default {
       return this.cartSubtotal + this.cartShippingFee;
     },
     appleProducts() {
+      if (!Array.isArray(this.products)) return [];
       return this.products.filter(p => !p.product_type || p.product_type === 'apple');
     },
     otherProducts() {
+      if (!Array.isArray(this.products)) return [];
       return this.products.filter(p => p.product_type === 'other');
     },
     uniqueCategories() {
@@ -318,7 +320,8 @@ export default {
       try {
         const res = await axios.get('/api/products');
         if (res.data.success) {
-          this.products = res.data.data;
+          const raw = res.data.data;
+          this.products = Array.isArray(raw) ? raw : (raw && typeof raw === 'object' ? Object.values(raw) : []);
         }
       } catch (err) {
         console.error(err);

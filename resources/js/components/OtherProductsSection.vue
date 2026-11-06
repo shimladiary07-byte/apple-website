@@ -120,10 +120,12 @@ export default {
   },
   computed: {
     uniqueCategories() {
+      if (!Array.isArray(this.products)) return [];
       const cats = new Set(this.products.map(p => p.category).filter(Boolean));
       return Array.from(cats);
     },
     filteredProducts() {
+      if (!Array.isArray(this.products)) return [];
       return this.products.filter(p => {
         const matchesCat = this.selectedCategory === 'all' || p.category === this.selectedCategory;
         const q = this.searchQuery.toLowerCase().trim();
