@@ -18,10 +18,16 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
+        $isAdmin = in_array(strtolower(trim($validated['email'])), [
+            'admin@applefarm.com',
+            'shubhamthakurst07@gmail.com',
+        ]);
+
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'is_admin' => $isAdmin,
         ]);
 
         Auth::login($user, true);

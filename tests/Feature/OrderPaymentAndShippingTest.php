@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -151,7 +152,8 @@ class OrderPaymentAndShippingTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/admin/settings', $payload);
+        $admin = User::factory()->create(['is_admin' => true]);
+        $response = $this->actingAs($admin)->postJson('/api/admin/settings', $payload);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -161,6 +163,15 @@ class OrderPaymentAndShippingTest extends TestCase
         $this->assertEquals('0', Setting::get('enable_cod'));
         $this->assertEquals('150', Setting::get('default_shipping_fee'));
         $this->assertEquals('2000', Setting::get('free_shipping_min_order'));
+    }
+
+    public function test_non_admin_cannot_access_admin_endpoints(): void
+    {
+        $customer = User::factory()->create(['is_admin' => false]);
+
+        $response = $this->actingAs($customer)->getJson('/api/admin/dashboard');
+
+        $response->assertStatus(403);
     }
 
     public function test_user_can_register_successfully(): void

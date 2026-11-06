@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\InquiryController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SettingController;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
 // Public APIs
@@ -30,8 +31,8 @@ Route::prefix('api')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 
-    // Admin APIs
-    Route::prefix('admin')->group(function () {
+    // Admin APIs (Protected: Only users with is_admin = true can access)
+    Route::prefix('admin')->middleware(['auth', EnsureUserIsAdmin::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'stats']);
 
         // Products CRUD

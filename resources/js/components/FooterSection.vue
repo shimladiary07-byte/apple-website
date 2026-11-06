@@ -12,7 +12,7 @@
             </div>
             <div>
               <span class="text-xl font-bold tracking-tight text-white font-serif-title">{{ settings.farm_name || 'Kinnaur Orchards' }}</span>
-              <p class="text-xs text-amber-400 font-semibold">High Altitude Apple Farm • Kinnaur, H.P.</p>
+              <p class="text-xs text-amber-400 font-semibold">High Altitude Apple Farm • shimla, H.P.</p>
             </div>
           </div>
 

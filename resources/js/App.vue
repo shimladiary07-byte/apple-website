@@ -21,13 +21,15 @@
       <Navbar
         :settings="settings"
         :cart-count="cartItemCount"
-        :is-admin="!!currentUser"
+        :is-admin="currentUser && !!currentUser.is_admin"
+        :current-user="currentUser"
         :is-dark-mode="isDarkMode"
         @toggle-dark-mode="toggleDarkMode"
         @open-cart="isCartOpen = true"
         @open-track="openTrackModal('')"
         @open-bulk="isBulkOpen = true"
         @open-admin-login="isLoginOpen = true"
+        @logout="handleCustomerLogout"
         @scroll-to="scrollToSection"
         @navigate="handleNavigate"
       />
@@ -389,7 +391,18 @@ export default {
     },
     onLoggedIn(user) {
       this.currentUser = user;
-      this.currentView = 'admin';
+      if (user && user.is_admin) {
+        this.currentView = 'admin';
+      } else {
+        this.currentView = 'shop';
+      }
+    },
+    async handleCustomerLogout() {
+      try {
+        await axios.post('/api/auth/logout');
+      } catch (e) {}
+      this.currentUser = null;
+      this.currentView = 'shop';
     },
     onLoggedOut() {
       this.currentUser = null;
@@ -400,7 +413,11 @@ export default {
     },
     handleNavigate(view) {
       if (view === 'admin') {
-        this.currentView = 'admin';
+        if (this.currentUser && this.currentUser.is_admin) {
+          this.currentView = 'admin';
+        } else {
+          this.isLoginOpen = true;
+        }
       } else {
         this.currentView = 'shop';
         window.scrollTo({ top: 0, behavior: 'smooth' });
