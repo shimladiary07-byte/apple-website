@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Setting extends Model
 {
@@ -13,13 +14,15 @@ class Setting extends Model
 
     public static function get($key, $default = null)
     {
-        $setting = self::where('key', $key)->first();
+        $all = self::allKeyValues();
 
-        return $setting ? $setting->value : $default;
+        return $all[$key] ?? $default;
     }
 
     public static function set($key, $value)
     {
+        Cache::forget('site_settings_cache');
+
         return self::updateOrCreate(
             ['key' => $key],
             ['value' => $value]
@@ -28,6 +31,8 @@ class Setting extends Model
 
     public static function allKeyValues()
     {
-        return self::pluck('value', 'key')->toArray();
+        return Cache::remember('site_settings_cache', 3600, function () {
+            return self::pluck('value', 'key')->toArray();
+        });
     }
 }

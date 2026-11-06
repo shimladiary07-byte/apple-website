@@ -296,9 +296,11 @@ export default {
   },
   mounted() {
     this.initTheme();
-    this.fetchSettings();
-    this.fetchProducts();
-    this.checkAuth();
+    Promise.all([
+      this.fetchSettings(),
+      this.fetchProducts(),
+      this.checkAuth(),
+    ]);
     this.loadCartFromStorage();
   },
   methods: {
