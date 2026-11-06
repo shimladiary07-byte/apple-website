@@ -26,7 +26,7 @@
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
             <div class="p-3 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 shadow-2xs">
               <div class="text-2xl mb-1">🏔️</div>
-              <div class="text-xs font-bold text-stone-900 dark:text-stone-100">8,500 ft Altitude</div>
+              <div class="text-xs font-bold text-stone-900 dark:text-stone-100">6,350 ft Altitude</div>
               <div class="text-[11px] text-stone-500 dark:text-stone-400">Pure glacial snow water</div>
             </div>
 

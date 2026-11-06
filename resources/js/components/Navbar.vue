@@ -23,7 +23,7 @@
                 Direct Farmer
               </span>
             </div>
-            <p class="text-[11px] text-stone-500 dark:text-stone-400 hidden xl:block font-medium whitespace-nowrap">6,300 ft Altitude • 100% Tree-Ripened</p>
+            <p class="text-[11px] text-stone-500 dark:text-stone-400 hidden xl:block font-medium whitespace-nowrap">6,350 ft Altitude • 100% Tree-Ripened</p>
           </div>
         </div>
 

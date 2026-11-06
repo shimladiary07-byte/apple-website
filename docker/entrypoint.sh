@@ -9,12 +9,10 @@ echo "Configuring Apache to listen on port ${TARGET_PORT}..."
 sed -i -E "s/Listen [0-9]+/Listen ${TARGET_PORT}/g" /etc/apache2/ports.conf
 sed -i -E "s/<VirtualHost \*:[0-9]+>/<VirtualHost \*:${TARGET_PORT}>/g" /etc/apache2/sites-available/000-default.conf
 
-# Ensure .env exists in container
-if [ ! -f /var/www/html/.env ]; then
-    cp /var/www/html/.env.example /var/www/html/.env
-fi
+# Remove any leftover .env so Render system environment variables take direct precedence
+rm -f /var/www/html/.env
 
-# Ensure SQLite database file exists if DB_CONNECTION is sqlite
+# Ensure SQLite database file exists only if DB_CONNECTION is sqlite
 if [ "${DB_CONNECTION:-sqlite}" = "sqlite" ]; then
     DB_FILE="${DB_DATABASE:-/var/www/html/database/database.sqlite}"
     mkdir -p "$(dirname "$DB_FILE")"
@@ -47,6 +45,7 @@ fi
 php artisan storage:link --force || true
 
 # Run database migrations
+echo "Database Connection: ${DB_CONNECTION:-sqlite} | Database Host: ${DB_HOST:-localhost} | Database Name: ${DB_DATABASE:-default}"
 echo "Running database migrations..."
 php artisan migrate --force || echo "Warning: Migration failed or skipped, check DB settings."
 

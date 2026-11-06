@@ -16,9 +16,9 @@ services:
       - key: APP_URL
         sync: false
       - key: DB_CONNECTION
-        value: sqlite
+        sync: false
       - key: DB_DATABASE
-        value: /var/www/html/database/database.sqlite
+        sync: false
       - key: SESSION_DRIVER
         value: file
       - key: CACHE_STORE
