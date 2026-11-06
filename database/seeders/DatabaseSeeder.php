@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Guard: If database already has products, skip seeder so user-added data is never overwritten on redeploys!
+        if (Product::exists()) {
+            return;
+        }
+
         // 1. Create Farmer Admin User
         User::updateOrCreate(
             ['email' => 'admin@applefarm.com'],
