@@ -885,8 +885,8 @@
                   <span class="block text-[10px] font-bold text-stone-500 dark:text-stone-400 mb-1">🔗 OR Image URL:</span>
                   <input 
                     v-model="editSettings.banner_image" 
-                    type="url" 
-                    placeholder="https://..."
+                    type="text" 
+                    placeholder="https://... or /uploads/..."
                     class="w-full px-3 py-1.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
                   />
                 </div>
@@ -920,8 +920,8 @@
                   <span class="block text-[10px] font-bold text-stone-500 dark:text-stone-400 mb-1">🔗 OR Image URL:</span>
                   <input 
                     v-model="editSettings.farmer_photo" 
-                    type="url" 
-                    placeholder="https://..."
+                    type="text" 
+                    placeholder="https://... or /uploads/..."
                     class="w-full px-3 py-1.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
                   />
                 </div>
