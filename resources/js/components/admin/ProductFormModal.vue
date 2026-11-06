@@ -1,29 +1,29 @@
 <template>
   <div v-if="isOpen" class="fixed inset-0 z-50 overflow-y-auto bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden my-8 p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200">
+    <div class="relative w-full max-w-2xl bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden my-8 p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200">
       
       <!-- Close Button -->
       <button 
         @click="$emit('close')" 
-        class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 hover:bg-stone-100 rounded-xl transition-colors cursor-pointer"
+        class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-xl transition-colors cursor-pointer"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
       <!-- Modal Header -->
       <div class="flex items-center gap-3 mb-6">
-        <div class="w-10 h-10 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg">
+        <div class="w-10 h-10 rounded-2xl bg-red-100 dark:bg-red-950/70 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-lg">
           {{ form.product_type === 'other' ? '🍯' : '🍎' }}
         </div>
         <div>
-          <h3 class="text-xl font-bold text-stone-900 font-serif-title">
+          <h3 class="text-xl font-bold text-stone-900 dark:text-stone-100 font-serif-title">
             {{ isEditing ? 'Edit Product' : 'Add New Product' }}
           </h3>
-          <p class="text-xs text-stone-500">Products and custom categories added here will appear directly on the storefront</p>
+          <p class="text-xs text-stone-500 dark:text-stone-400">Products and custom categories added here will appear directly on the storefront</p>
         </div>
       </div>
 
-      <div v-if="errorMessage" class="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
+      <div v-if="errorMessage" class="mb-4 p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-xs">
         {{ errorMessage }}
       </div>
 
@@ -31,24 +31,24 @@
         
         <!-- 1. Product Type Selector (Apple vs Other Product) -->
         <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1.5">Product Type *</label>
+          <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">Product Type *</label>
           <div class="grid grid-cols-2 gap-3">
             <div 
               @click="setProductType('apple')" 
               :class="[
                 'p-3 rounded-2xl border text-xs cursor-pointer transition-all flex items-center gap-2.5',
                 form.product_type === 'apple' 
-                  ? 'border-red-600 bg-red-50/70 font-bold text-red-950 ring-2 ring-red-500/20 shadow-xs' 
-                  : 'border-stone-200 text-stone-700 hover:bg-stone-50'
+                  ? 'border-red-600 bg-red-50/70 dark:bg-red-950/50 font-bold text-red-950 dark:text-red-300 ring-2 ring-red-500/20 shadow-xs' 
+                  : 'border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800'
               ]"
             >
               <div class="w-4 h-4 rounded-full border flex items-center justify-center shrink-0"
-                :class="form.product_type === 'apple' ? 'border-red-600 bg-red-600' : 'border-stone-400'">
+                :class="form.product_type === 'apple' ? 'border-red-600 bg-red-600' : 'border-stone-400 dark:border-stone-500'">
                 <span v-if="form.product_type === 'apple'" class="w-1.5 h-1.5 rounded-full bg-white"></span>
               </div>
               <div>
                 <div>🍎 Fresh Apple Variety</div>
-                <div class="text-[10px] text-stone-500 font-normal">Displayed in Apple Varieties Catalog</div>
+                <div class="text-[10px] text-stone-500 dark:text-stone-400 font-normal">Displayed in Apple Varieties Catalog</div>
               </div>
             </div>
 
@@ -57,17 +57,17 @@
               :class="[
                 'p-3 rounded-2xl border text-xs cursor-pointer transition-all flex items-center gap-2.5',
                 form.product_type === 'other' 
-                  ? 'border-amber-600 bg-amber-50/70 font-bold text-amber-950 ring-2 ring-amber-500/20 shadow-xs' 
-                  : 'border-stone-200 text-stone-700 hover:bg-stone-50'
+                  ? 'border-amber-600 bg-amber-50/70 dark:bg-amber-950/50 font-bold text-amber-950 dark:text-amber-300 ring-2 ring-amber-500/20 shadow-xs' 
+                  : 'border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800'
               ]"
             >
               <div class="w-4 h-4 rounded-full border flex items-center justify-center shrink-0"
-                :class="form.product_type === 'other' ? 'border-amber-600 bg-amber-600' : 'border-stone-400'">
+                :class="form.product_type === 'other' ? 'border-amber-600 bg-amber-600' : 'border-stone-400 dark:border-stone-500'">
                 <span v-if="form.product_type === 'other'" class="w-1.5 h-1.5 rounded-full bg-white"></span>
               </div>
               <div>
                 <div>🍯 Other Farm Product</div>
-                <div class="text-[10px] text-stone-500 font-normal">Honey, Vinegar, Walnuts, Jams, Snacks</div>
+                <div class="text-[10px] text-stone-500 dark:text-stone-400 font-normal">Honey, Vinegar, Walnuts, Jams, Snacks</div>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
         <!-- 2. Name & Category -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
               {{ form.product_type === 'other' ? 'Product Name *' : 'Apple Variety Name *' }}
             </label>
             <input 
@@ -84,12 +84,12 @@
               type="text" 
               required 
               :placeholder="form.product_type === 'other' ? 'e.g. Pure Wild Forest Honey' : 'e.g. Kinnaur Royal Delicious'" 
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-red-500 text-xs outline-none"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:border-red-500 text-xs outline-none"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
               Category (Choose or Type Custom) *
             </label>
             <input 
@@ -97,7 +97,7 @@
               type="text" 
               required 
               :placeholder="form.product_type === 'other' ? 'e.g. Honey & Preserves' : 'e.g. Premium Dessert Apple'" 
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-red-500 text-xs outline-none font-medium"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:border-red-500 text-xs outline-none font-medium"
             />
             
             <!-- Quick Category Pill Suggestions -->
@@ -107,8 +107,8 @@
                 :key="cat"
                 type="button"
                 @click="form.category = cat"
-                class="px-2 py-0.5 rounded-md bg-stone-100 hover:bg-stone-200 text-stone-700 text-[10px] font-semibold transition-colors cursor-pointer"
-                :class="{ 'bg-red-100 text-red-800 font-bold': form.category === cat }"
+                class="px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 text-[10px] font-semibold transition-colors cursor-pointer"
+                :class="{ 'bg-red-100 dark:bg-red-950/80 text-red-800 dark:text-red-300 font-bold': form.category === cat }"
               >
                 {{ cat }}
               </button>
@@ -118,55 +118,55 @@
 
         <!-- Tagline -->
         <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Short Tagline / Hook</label>
+          <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Short Tagline / Hook</label>
           <input 
             v-model="form.tagline" 
             type="text" 
             :placeholder="form.product_type === 'other' ? 'e.g. Raw, Unprocessed Multi-Flora Wild Forest Honey' : 'e.g. High Elevation Crunch & Natural Mountain Sweetness'" 
-            class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-red-500 text-xs outline-none"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:border-red-500 text-xs outline-none"
           />
         </div>
 
         <!-- Description -->
         <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Full Description</label>
+          <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Full Description</label>
           <textarea 
             v-model="form.description" 
             rows="3" 
             :placeholder="form.product_type === 'other' ? 'Describe the preparation method, organic purity, packaging, benefits...' : 'Describe the aroma, peel characteristics, mountain altitude...'" 
-            class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-red-500 text-xs outline-none"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 focus:border-red-500 text-xs outline-none"
           ></textarea>
         </div>
 
         <!-- Origin, Harvest Season, Grade -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Origin / Farm Location</label>
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Origin / Farm Location</label>
             <input 
               v-model="form.origin" 
               type="text" 
               placeholder="e.g. Kalpa, Kinnaur (8,500 ft)" 
-              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Harvest / Batch</label>
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Harvest / Batch</label>
             <input 
               v-model="form.harvest_season" 
               type="text" 
               placeholder="e.g. Autumn Harvest" 
-              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Quality Grade</label>
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Quality Grade</label>
             <input 
               v-model="form.grade" 
               type="text" 
               placeholder="e.g. 100% Raw Pure / Export Grade" 
-              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
             />
           </div>
         </div>
@@ -174,7 +174,7 @@
         <!-- Price per unit / kg & metrics -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
               {{ form.product_type === 'other' ? 'Base Price (₹)' : 'Price / Kg (₹) *' }}
             </label>
             <input 
@@ -183,69 +183,69 @@
               step="1" 
               required 
               placeholder="190" 
-              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none font-bold"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none font-bold"
             />
           </div>
 
           <div v-if="form.product_type === 'apple'">
-            <label class="block text-xs font-bold text-stone-700 mb-1">Crispness Level</label>
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Crispness Level</label>
             <input 
               v-model="form.crispness" 
               type="text" 
               placeholder="Extremely Crunchy (5/5)" 
-              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
             />
           </div>
 
           <div v-if="form.product_type === 'apple'">
-            <label class="block text-xs font-bold text-stone-700 mb-1">Sweetness Level</label>
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Sweetness Level</label>
             <input 
               v-model="form.sweetness" 
               type="text" 
               placeholder="Sweet & Juicy (4.8/5)" 
-              class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none"
+              class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 text-xs outline-none"
             />
           </div>
         </div>
 
         <!-- 3. PHOTO UPLOAD & URL COMBO (Selected Photo or URL) -->
-        <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
-          <label class="block text-xs font-bold text-stone-800">
+        <div class="p-4 rounded-2xl bg-stone-50 dark:bg-stone-850 border border-stone-200 dark:border-stone-800 space-y-3">
+          <label class="block text-xs font-bold text-stone-800 dark:text-stone-200">
             Product Photo (Choose File from Computer OR Enter URL)
           </label>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
             <!-- Choose File from Computer -->
             <div>
-              <span class="block text-[11px] font-bold text-stone-600 mb-1">📁 Upload Image File:</span>
+              <span class="block text-[11px] font-bold text-stone-600 dark:text-stone-400 mb-1">📁 Upload Image File:</span>
               <input 
                 type="file" 
                 @change="handleImageFileChange" 
                 accept="image/*" 
-                class="w-full text-xs text-stone-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-stone-900 file:text-white hover:file:bg-stone-800 cursor-pointer"
+                class="w-full text-xs text-stone-600 dark:text-stone-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-stone-900 dark:file:bg-stone-700 file:text-white hover:file:bg-stone-800 cursor-pointer"
               />
             </div>
 
             <!-- OR Enter URL -->
             <div>
-              <span class="block text-[11px] font-bold text-stone-600 mb-1">🔗 OR Enter Image URL:</span>
+              <span class="block text-[11px] font-bold text-stone-600 dark:text-stone-400 mb-1">🔗 OR Enter Image URL:</span>
               <input 
                 v-model="form.image_url" 
                 type="url" 
                 placeholder="https://images.unsplash.com/..." 
-                class="w-full px-3 py-1.5 rounded-xl border border-stone-300 text-xs outline-none bg-white"
+                class="w-full px-3 py-1.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs outline-none bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500"
               />
             </div>
           </div>
 
           <!-- Live Image Preview -->
-          <div v-if="localImagePreview || form.image_url" class="flex items-center gap-3 pt-2 border-t border-stone-200">
-            <div class="w-16 h-16 rounded-xl border border-stone-300 bg-white overflow-hidden shrink-0 shadow-2xs">
+          <div v-if="localImagePreview || form.image_url" class="flex items-center gap-3 pt-2 border-t border-stone-200 dark:border-stone-800">
+            <div class="w-16 h-16 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 overflow-hidden shrink-0 shadow-2xs">
               <img :src="localImagePreview || form.image_url" alt="Preview" class="w-full h-full object-cover" />
             </div>
-            <div class="text-xs text-stone-500">
-              <div class="font-bold text-stone-800">Photo Preview</div>
-              <div class="text-[10px] text-stone-400 truncate max-w-xs">
+            <div class="text-xs text-stone-500 dark:text-stone-400">
+              <div class="font-bold text-stone-800 dark:text-stone-200">Photo Preview</div>
+              <div class="text-[10px] text-stone-400 dark:text-stone-500 truncate max-w-xs">
                 {{ localImagePreview ? 'Selected from local computer' : form.image_url }}
               </div>
             </div>
@@ -253,15 +253,15 @@
         </div>
 
         <!-- 4. Packaging / Size Options Configuration -->
-        <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
+        <div class="p-4 rounded-2xl bg-stone-50 dark:bg-stone-850 border border-stone-200 dark:border-stone-800 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-stone-800">
+            <span class="text-xs font-bold text-stone-800 dark:text-stone-200">
               {{ form.product_type === 'other' ? 'Pack Sizes & Pricing Options' : 'Box Sizes & Packaging Pricing' }}
             </span>
             <button 
               type="button" 
               @click="addBoxOption" 
-              class="text-xs font-bold text-red-600 hover:text-red-700 flex items-center gap-1 cursor-pointer"
+              class="text-xs font-bold text-red-600 dark:text-red-400 hover:text-red-700 flex items-center gap-1 cursor-pointer"
             >
               + Add Size Option
             </button>
@@ -272,21 +272,21 @@
               v-model="box.size" 
               type="text" 
               :placeholder="form.product_type === 'other' ? 'e.g. 500g Glass Jar' : 'e.g. 5 Kg Box (~22 Apples)'" 
-              class="flex-1 px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white"
+              class="flex-1 px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500"
             />
             <div class="flex items-center gap-1">
-              <span class="text-xs text-stone-500">₹</span>
+              <span class="text-xs text-stone-500 dark:text-stone-400">₹</span>
               <input 
                 v-model.number="box.price" 
                 type="number" 
                 placeholder="Price" 
-                class="w-24 px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white font-bold"
+                class="w-24 px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 font-bold"
               />
             </div>
             <button 
               type="button" 
               @click="removeBoxOption(idx)" 
-              class="p-2 text-stone-400 hover:text-red-600 rounded-lg cursor-pointer"
+              class="p-2 text-stone-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg cursor-pointer"
             >
               ✕
             </button>
@@ -296,8 +296,8 @@
         <!-- Stock Status & Featured Switch -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Stock Availability</label>
-            <select v-model="form.stock_status" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs outline-none bg-white cursor-pointer font-medium">
+            <label class="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">Stock Availability</label>
+            <select v-model="form.stock_status" class="w-full px-3 py-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs outline-none bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 cursor-pointer font-medium">
               <option value="in_stock">In Stock / Available</option>
               <option value="pre_order">Pre-Order</option>
               <option value="out_of_stock">Out of Stock</option>
@@ -306,21 +306,21 @@
 
           <div class="flex items-center gap-2 pt-5">
             <input id="is_featured" type="checkbox" v-model="form.is_featured" class="w-4 h-4 rounded text-red-600 cursor-pointer"/>
-            <label for="is_featured" class="text-xs font-bold text-stone-700 cursor-pointer">Featured on Storefront</label>
+            <label for="is_featured" class="text-xs font-bold text-stone-700 dark:text-stone-300 cursor-pointer">Featured on Storefront</label>
           </div>
 
           <div class="flex items-center gap-2 pt-5">
             <input id="is_active" type="checkbox" v-model="form.is_active" class="w-4 h-4 rounded text-red-600 cursor-pointer"/>
-            <label for="is_active" class="text-xs font-bold text-stone-700 cursor-pointer">Active (Visible)</label>
+            <label for="is_active" class="text-xs font-bold text-stone-700 dark:text-stone-300 cursor-pointer">Active (Visible)</label>
           </div>
         </div>
 
         <!-- Modal Actions -->
-        <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200 dark:border-stone-800">
           <button 
             type="button" 
             @click="$emit('close')" 
-            class="px-4 py-2.5 rounded-xl border border-stone-300 text-xs font-bold text-stone-700 hover:bg-stone-100 cursor-pointer"
+            class="px-4 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 cursor-pointer"
           >
             Cancel
           </button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 font-sans selection:bg-red-600 selection:text-white transition-colors duration-200">
+  <div class="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 font-sans selection:bg-red-600 selection:text-white transition-colors duration-200 overflow-x-hidden w-full">
 
     <!-- IF IN ADMIN VIEW -->
     <template v-if="currentView === 'admin' && currentUser">
